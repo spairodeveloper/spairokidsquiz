@@ -65,23 +65,52 @@ def get_css() -> str:
         border-radius: 14px !important;
         margin-bottom: 8px !important;
         backdrop-filter: blur(10px) !important;
+        overflow: hidden !important;
     }
     [data-testid="stExpander"]:hover {
         border-color: rgba(139,92,246,0.4) !important;
     }
-    [data-testid="stExpander"] summary {
+
+    /* Fix overlapping arrow + label in all Streamlit versions */
+    [data-testid="stExpander"] details {
+        background: transparent !important;
+    }
+    [data-testid="stExpander"] details > summary {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        list-style: none !important;
+        padding: 10px 16px !important;
+        cursor: pointer !important;
+        background: transparent !important;
+    }
+    [data-testid="stExpander"] details > summary::-webkit-details-marker {
+        display: none !important;
+    }
+    /* Label text inside summary */
+    [data-testid="stExpander"] details > summary p,
+    [data-testid="stExpander"] details > summary span,
+    [data-testid="stExpander"] details > summary div {
         color: #94A3B8 !important;
         font-size: 13px !important;
         font-weight: 500 !important;
-        padding: 10px 16px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1.4 !important;
     }
-    [data-testid="stExpander"] summary:hover {
+    [data-testid="stExpander"] details > summary:hover p,
+    [data-testid="stExpander"] details > summary:hover span {
         color: #C4B5FD !important;
     }
-    [data-testid="stExpander"] summary svg {
+    /* Arrow icon */
+    [data-testid="stExpander"] details > summary svg {
         fill: #8B5CF6 !important;
+        flex-shrink: 0 !important;
+        width: 16px !important;
+        height: 16px !important;
     }
     /* Expander content area */
+    [data-testid="stExpander"] details > div,
     [data-testid="stExpander"] > div:last-child {
         background: transparent !important;
         padding: 4px 16px 14px 16px !important;
